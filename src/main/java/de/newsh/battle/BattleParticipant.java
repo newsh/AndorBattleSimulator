@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import de.newsh.creatures.*;
+import de.newsh.heroes.*;
+
 /**
  * Class representation of hero or creature participating in a battle.
  * 
@@ -196,5 +199,37 @@ public abstract class BattleParticipant implements Cloneable {
 
 	public void setBlackDice(boolean hasBlackDice) {
 		this.hasBlackDice = hasBlackDice;
+	}
+
+	public static BattleParticipant getClassByName(String className) {
+		switch (className) {
+		case "Archer":
+			return new Archer();
+		case "Warrior":
+			return new Warrior();
+		case "Wizard":
+			return new Wizard();
+		case "Dwarf":
+			return new Dwarf();
+		case "Orfen":
+			return new Orfen();
+		case "Gor":
+			return new Gor();
+		case "Skral":
+			return new Skral();
+		case "Wardrak":
+			return new Wardrak();
+		case "Troll":
+			return new Troll();
+		case "BarbarianWarrior":
+			return new BarbarianWarrior();
+		case "BarbarianChieftain":
+			return new BarbarianChieftain();
+		case "BarbarianKing":
+			return new BarbarianKing(12);
+		default:
+			break;
+		}
+		return null;
 	}
 }
