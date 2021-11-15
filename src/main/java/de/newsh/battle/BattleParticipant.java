@@ -46,12 +46,20 @@ public abstract class BattleParticipant implements Cloneable {
 		return willpower;
 	}
 
+	public void setWillpower(int willpower) {
+		this.willpower = (short) willpower;
+	}
+
 	public void decreaseWillpowerBy(int willpower) {
 		this.willpower -= willpower;
 	}
 
 	public short getStrength() {
 		return strength;
+	}
+
+	public void setStrength(int strength) {
+		this.strength = (short) strength;
 	}
 
 	/**
