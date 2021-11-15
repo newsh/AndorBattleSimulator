@@ -86,17 +86,15 @@ public class Battle {
 	/**
 	 * Prints a summary of battle's most relevant data.
 	 */
-	private void printSummary() {
-		DecimalFormat df = new DecimalFormat("####0.00");
+	public void printSummary() {
 		System.out.println(
-				"Summary for:\n" + heroes.stream().map(BattleParticipant::toString).collect(Collectors.joining(", "))
-						+ "\n	vs. \n" + creature.toString() + "\n" + "\nWin rate: "
-						+ df.format((double) heroesWinCount / numberOfSimulationsToRun * 100) + " %"
-						+ "\nWillpower lost: ∅ " + df.format((double) willpowerLostTotal / numberOfSimulationsToRun)
-						+ "\nHours needed: ∅ " + df.format((double) hoursNeededTotal / numberOfSimulationsToRun)
+				"Summary for:\n" + getParticipantsHeroes()
+						+ "\n	vs. \n" + getParticipantsCreature() + "\n" + "\nWin rate: "
+						+ getWinRatePercentage()
+						+ "\nWillpower lost: ∅ " + getWillpowerLostAverage()
+						+ "\nHours needed: ∅ " + getHoursNeededAverage()
 						+ "\nSimulations run: " + numberOfSimulationsToRun);
 	}
-
 	/**
 	 * Prints data of a battle's single round.
 	 */
@@ -166,5 +164,31 @@ public class Battle {
 	 */
 	public void setSimulationsToRun(int numberOfSimulations) {
 		this.numberOfSimulationsToRun = numberOfSimulations;
+	}
+	/**
+	 * Returns string representation of battle's hero participants.
+	 * @return string
+	 */
+	public String getParticipantsHeroes() {
+		return heroes.stream().map(BattleParticipant::toString).collect(Collectors.joining(", "));
+	}
+	/**
+	 * Returns string representation of battle's creature participants.
+	 * @return string
+	 */
+	public String getParticipantsCreature() {
+		return creature.toString();
+	}
+	public String getWinRatePercentage() {
+		DecimalFormat df = new DecimalFormat("####0.00");
+		return df.format((double) heroesWinCount / numberOfSimulationsToRun * 100) + " %";
+	}
+	public String getWillpowerLostAverage() {
+		DecimalFormat df = new DecimalFormat("####0.00");
+		return df.format((double) willpowerLostTotal / numberOfSimulationsToRun);
+	}
+	public String getHoursNeededAverage() {
+		DecimalFormat df = new DecimalFormat("####0.00");
+		return df.format((double) hoursNeededTotal / numberOfSimulationsToRun);
 	}
 }
