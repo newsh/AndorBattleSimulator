@@ -25,6 +25,8 @@ public class Wizard extends BattleParticipant {
 		if (hasWitchsBrew() && witchsBrewIsReasonableToUse(Arrays.asList(rolledVal), rolledVal)) {
 			rolledVal = useWitchsBrew(Arrays.asList(rolledVal));
 		}
+		if(hasMedicinalHerb())
+			rolledVal = useMedicinalHerb(rolledVal);
 		if (isVerbose)
 			System.out.println("Wizard rolled " + rolledVal);
 		return rolledVal;

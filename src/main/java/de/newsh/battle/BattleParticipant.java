@@ -29,6 +29,7 @@ public abstract class BattleParticipant implements Cloneable {
 	private boolean hasHelmet;
 	protected boolean hasBlackDice;
 	private int witchsBrewAmount = 0;
+	private int medicinalHerbAmount = 0;
 
 	protected BattleParticipant(int willpower, int strength) {
 		this.willpower = (short) willpower;
@@ -90,9 +91,17 @@ public abstract class BattleParticipant implements Cloneable {
 		if (hasWitchsBrew() && witchsBrewIsReasonableToUse(valuesRolled, highestVal)) {
 			highestVal = useWitchsBrew(valuesRolled);
 		}
+		if (hasMedicinalHerb())
+			highestVal = useMedicinalHerb(highestVal);
 		if (isVerbose)
 			System.out.println(name + " rolled " + highestVal + ". " + valuesRolled.toString());
 		return highestVal;
+	}
+
+	protected int useMedicinalHerb(int value) {
+		int valIncreasedByHerb = value + getMedicinalHerb();
+		setMedicinalHerb(0);
+		return valIncreasedByHerb;
 	}
 
 	protected int useWitchsBrew(List<Integer> valuesRolled) {
@@ -130,12 +139,31 @@ public abstract class BattleParticipant implements Cloneable {
 	public int getWitchsBrew() {
 		return witchsBrewAmount;
 	}
+
 	/**
 	 * Checks if battle participant has at least one witch's brew equipped.
+	 *
 	 * @return
 	 */
 	protected boolean hasWitchsBrew() {
 		return witchsBrewAmount > 0;
+	}
+
+	public void setMedicinalHerb(int amount) {
+		medicinalHerbAmount = amount;
+	}
+
+	public int getMedicinalHerb() {
+		return medicinalHerbAmount;
+	}
+
+	/**
+	 * Checks if battle participant has at least one medicinal herb equipped.
+	 *
+	 * @return
+	 */
+	protected boolean hasMedicinalHerb() {
+		return medicinalHerbAmount > 0;
 	}
 
 	/**
@@ -229,8 +257,10 @@ public abstract class BattleParticipant implements Cloneable {
 			str += ",Helmet";
 		if (hasBlackDice)
 			str += ",Black Dice";
-		if(hasWitchsBrew())
-			str += ", Witch's Brew (" + getWitchsBrew() +")";
+		if (hasWitchsBrew())
+			str += ", Witch's Brew (" + getWitchsBrew() + ")";
+		if (hasMedicinalHerb())
+			str += ", Medicinal Herb (" + getMedicinalHerb() + ")";
 		str += ")";
 		return str;
 	}
