@@ -3,6 +3,7 @@ package de.newsh.heroes;
 import java.util.concurrent.ThreadLocalRandom;
 
 import de.newsh.battle.BattleParticipant;
+import java.util.Arrays;
 
 public class Wizard extends BattleParticipant {
 	public Wizard() {
@@ -21,6 +22,9 @@ public class Wizard extends BattleParticipant {
 			rolledVal = rollBlackDice();
 		else
 			rolledVal = rollRegularDice();
+		if (hasWitchsBrew() && witchsBrewIsReasonableToUse(Arrays.asList(rolledVal), rolledVal)) {
+			rolledVal = useWitchsBrew(Arrays.asList(rolledVal));
+		}
 		if (isVerbose)
 			System.out.println("Wizard rolled " + rolledVal);
 		return rolledVal;

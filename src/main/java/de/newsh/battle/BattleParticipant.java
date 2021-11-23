@@ -28,6 +28,7 @@ public abstract class BattleParticipant implements Cloneable {
 	protected short[] diceDistribution;
 	private boolean hasHelmet;
 	protected boolean hasBlackDice;
+	private int witchsBrewAmount = 0;
 
 	protected BattleParticipant(int willpower, int strength) {
 		this.willpower = (short) willpower;
@@ -86,9 +87,55 @@ public abstract class BattleParticipant implements Cloneable {
 			highestVal = getDoubles(valuesRolled);
 		else
 			highestVal = Collections.max(valuesRolled);
+		if (hasWitchsBrew() && witchsBrewIsReasonableToUse(valuesRolled, highestVal)) {
+			highestVal = useWitchsBrew(valuesRolled);
+		}
 		if (isVerbose)
 			System.out.println(name + " rolled " + highestVal + ". " + valuesRolled.toString());
 		return highestVal;
+	}
+
+	protected int useWitchsBrew(List<Integer> valuesRolled) {
+		witchsBrewAmount--;
+		return Collections.max(valuesRolled) * 2;
+	}
+
+	/**
+	 * Strategies to decide when to use witch's brew can differ depending on current
+	 * game's situation.<br>
+	 * In this implementation a witch's brew will be used when at least a 10 is
+	 * achieved and it's effect is at least +5 more damage compared to when not
+	 * using it.
+	 *
+	 *
+	 * @param valuesRolled
+	 * @param highestVal
+	 * @return
+	 */
+	protected boolean witchsBrewIsReasonableToUse(List<Integer> valuesRolled, int highestVal) {
+		int couldBeVal = Collections.max(valuesRolled) * 2;
+		return (couldBeVal >= 10) && (Math.abs(couldBeVal - highestVal) > 5);
+	}
+
+	/**
+	 * To set a full (2x use) witch's Brew: <code>setWitchBrew(2)</code>.<br>
+	 * To set a half full (1x use) witch's brew: <code>setWitchBrew(1)</code>.
+	 *
+	 * @param amount
+	 */
+	public void setWitchsBrew(int amount) {
+		witchsBrewAmount = amount;
+	}
+
+	public int getWitchsBrew() {
+		return witchsBrewAmount;
+	}
+	/**
+	 * Checks if battle participant has at least one witch's brew equipped.
+	 * @return
+	 */
+	protected boolean hasWitchsBrew() {
+		return witchsBrewAmount > 0;
 	}
 
 	/**
@@ -182,6 +229,8 @@ public abstract class BattleParticipant implements Cloneable {
 			str += ",Helmet";
 		if (hasBlackDice)
 			str += ",Black Dice";
+		if(hasWitchsBrew())
+			str += ", Witch's Brew (" + getWitchsBrew() +")";
 		str += ")";
 		return str;
 	}
