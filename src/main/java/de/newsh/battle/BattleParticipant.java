@@ -308,6 +308,8 @@ public abstract class BattleParticipant implements Cloneable {
 			return new Wardrak();
 		case "Troll":
 			return new Troll();
+		case "BlackHerald":
+			return new BlackHerald();
 		case "BarbarianWarrior":
 			return new BarbarianWarrior();
 		case "BarbarianChieftain":
