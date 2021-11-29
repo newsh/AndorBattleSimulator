@@ -1,0 +1,46 @@
+select {
+	font-size: 20px
+}
+
+div {
+	margin-bottom: 15px
+}
+
+button {
+	display: inline-block;
+	font-size: 15px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	border-radius: 15px;
+}
+
+input[type=submit] {
+	margin-left: 50px;
+	display: inline-block;
+	padding: 10px 25px;
+	font-size: 20px;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	border: none;
+	border-radius: 15px;
+}
+
+input[type=submit]:hover {
+	background-color: #3e8e41
+}
+
+#wrapper {
+	margin-left: 125px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+iframe {
+	border: 0px;
+}

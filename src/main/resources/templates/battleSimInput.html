@@ -1,0 +1,206 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="#{andorBattleSimulator}">Andor Battle Simulator</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.1/font/bootstrap-icons.css">
+<link th:href="@{/styles/main.css}" rel="stylesheet" />
+<link rel="shortcut icon" type="image/x-icon"
+	href="andor/images/CrossedSwordsEmoji.ico" />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" th:src="@{js/actions.js}"></script>
+<script th:inline="javascript">
+var archerl10n = [[#{archer}]];
+var warriorl10n = [[#{warrior}]];
+var wizardl10n = [[#{wizard}]];
+var dwarfl10n = [[#{dwarf}]];
+var wolfWarriorl10n = [[#{wolfWarrior}]];
+var itemsl10n = [[#{items}]];
+var helmetl10n = [[#{helmet}]];
+var blackDicel10n = [[#{blackDice}]];
+var witchBrew1l10n = [[#{witchBrew1}]];
+var witchBrew2l10n = [[#{witchBrew2}]];
+var witchBrew3l10n = [[#{witchBrew3}]];
+var witchBrew4l10n = [[#{witchBrew4}]];
+var witchBrew5l10n = [[#{witchBrew5}]];
+var witchBrew6l10n = [[#{witchBrew6}]];
+var medicinalHerb3l10n = [[#{medicinalHerb3}]];
+var medicinalHerb4l10n = [[#{medicinalHerb4}]];
+var medicinalHerb7l10n = [[#{medicinalHerb7}]];
+var medicinalHerb8l10n = [[#{medicinalHerb8}]];
+var medicinalHerb11l10n = [[#{medicinalHerb11}]];
+var maxPlayerReachedAlertl10n = [[#{maxPlayerReachedAlert}]];
+</script>
+</head>
+<body
+	th:onload="makeHeroWillpowerPreSelection();setCreatureWillpowerAndStrength()">
+	<form method="post" target="battleResultFrame">
+		<div>
+			<select th:onchange="setCreatureWillpowerAndStrength()" id="creature"
+				name="creature">
+				<option value="Gor" th:text="#{gor}">Gor</option>
+				<option value="Skral" th:text="#{skral}">Skral</option>
+				<option value="Wardrak" th:text="#{wardrak}">Wardrak</option>
+				<option value="Troll" th:text="#{troll}">Troll</option>
+				<option value="BlackHerald" th:text="#{blackHerald}">Black
+					Herald</option>
+				<option value="BarbarianWarrior" th:text="#{barbarianWarrior}">Warrior
+					(Barbarian)</option>
+				<option value="BarbarianChieftain" th:text="#{barbarianChieftain}">Chieftain
+					(Barbarian)</option>
+				<option value="BarbarianKing" th:text="#{barbarianKing}">King
+					(Barbarian)</option>
+			</select> <label>WP: <select id="willpowerCreature"
+				name="willpowerCreature"><option
+						th:each="i : ${#numbers.sequence(1, 20)}" th:value="${i}"
+						th:text="${i}"></option>
+			</select>
+			</label> <label>SP: <select id="strengthCreature"
+				name="strengthCreature"><option
+						th:each="i : ${#numbers.sequence(1, 50)}" th:value="${i}"
+						th:text="${i}"></option>
+			</select>
+			</label>
+		</div>
+		<h2>vs.</h2>
+		<div id="heroesDiv">
+			<div class="hero">
+				<select name="heroes">
+					<option value="Archer" th:text="#{archer}">Archer</option>
+					<option value="Warrior" th:text="#{warrior}">Warrior</option>
+					<option value="Wizard" th:text="#{wizard}">Wizard</option>
+					<option value="Dwarf" th:text="#{dwarf}">Dwarf</option>
+					<option value="Orfen" th:text="#{wolfWarrior}">Wizard</option>
+				</select> <label>WP: <select class="willpowerHeroes"
+					name="willpowerHeros"><option
+							th:each="i : ${#numbers.sequence(1, 20)}" th:value="${i}"
+							th:text="${i}"></option>
+				</select>
+				</label> <label>SP: <select class="firstStrength"
+					name="strengthHeros"><option
+							th:each="i : ${#numbers.sequence(1, 30)}" th:value="${i}"
+							th:text="${i}"></option>
+				</select>
+				</label> <br> <label th:inline="text">[[#{items}]]:<br> <select
+					name="item1">
+						<option>-</option>
+						<option value="helmet" th:text="#{helmet}">Helmet</option>
+						<option value="blackDice" th:text="#{blackDice}">Black
+							Dice</option>
+						<option value="witchBrew1x" th:text="#{witchBrew1}">Witch's
+							Brew (½ Bottle)</option>
+						<option value="witchBrew2x" th:text="#{witchBrew2}">Witch's
+							Brew (1 Bottle)</option>
+						<option value="witchBrew3x" th:text="#{witchBrew3}">Witch's
+							Brew (1½ Bottle)</option>
+						<option value="witchBrew4x" th:text="#{witchBrew4}">Witch's
+							Brew (2 Bottles)</option>
+						<option value="witchBrew5x" th:text="#{witchBrew5}">Witch's
+							Brew (2½ Bottles)</option>
+						<option value="witchBrew6x" th:text="#{witchBrew6}">Witch's
+							Brew (3 Bottles)</option>
+						<option value="medicinalHerb3" th:text="#{medicinalHerb3}">Medicinal
+							Herb (3)</option>
+						<option value="medicinalHerb4" th:text="#{medicinalHerb4}">Medicinal
+							Herb (4)</option>
+						<option value="medicinalHerb7" th:text="#{medicinalHerb7}">Medicinal
+							Herb (7)</option>
+						<option value="medicinalHerb8" th:text="#{medicinalHerb8}">Medicinal
+							Herb (8)</option>
+						<option value="medicinalHerb11" th:text="#{medicinalHerb11}">Medicinal
+							Herb (11)</option>
+				</select> <br>
+				</label> <select name="item2">
+					<option>-</option>
+					<option value="helmet" th:text="#{helmet}">Helmet</option>
+					<option value="blackDice" th:text="#{blackDice}">Black
+						Dice</option>
+					<option value="witchBrew1x" th:text="#{witchBrew1}">Witch's
+						Brew (½ Bottle)</option>
+					<option value="witchBrew2x" th:text="#{witchBrew2}">Witch's
+						Brew (1 Bottle)</option>
+					<option value="witchBrew3x" th:text="#{witchBrew3}">Witch's
+						Brew (1½ Bottle)</option>
+					<option value="witchBrew4x" th:text="#{witchBrew4}">Witch's
+						Brew (2 Bottles)</option>
+					<option value="witchBrew5x" th:text="#{witchBrew5}">Witch's
+						Brew (2½ Bottles)</option>
+					<option value="witchBrew6x" th:text="#{witchBrew6}">Witch's
+						Brew (3 Bottles)</option>
+					<option value="medicinalHerb3" th:text="#{medicinalHerb3}">Medicinal
+						Herb (3)</option>
+					<option value="medicinalHerb4" th:text="#{medicinalHerb4}">Medicinal
+						Herb (4)</option>
+					<option value="medicinalHerb7" th:text="#{medicinalHerb7}">Medicinal
+						Herb (7)</option>
+					<option value="medicinalHerb8" th:text="#{medicinalHerb8}">Medicinal
+						Herb (8)</option>
+					<option value="medicinalHerb11" th:text="#{medicinalHerb11}">Medicinal
+						Herb (11)</option>
+				</select> <br> <select name="item3">
+					<option>-</option>
+					<option value="helmet" th:text="#{helmet}">Helmet</option>
+					<option value="blackDice" th:text="#{blackDice}">Black
+						Dice</option>
+					<option value="witchBrew1x" th:text="#{witchBrew1}">Witch's
+						Brew (½ Bottle)</option>
+					<option value="witchBrew2x" th:text="#{witchBrew2}">Witch's
+						Brew (1 Bottle)</option>
+					<option value="witchBrew3x" th:text="#{witchBrew3}">Witch's
+						Brew (1½ Bottle)</option>
+					<option value="witchBrew4x" th:text="#{witchBrew4}">Witch's
+						Brew (2 Bottles)</option>
+					<option value="witchBrew5x" th:text="#{witchBrew5}">Witch's
+						Brew (2½ Bottles)</option>
+					<option value="witchBrew6x" th:text="#{witchBrew6}">Witch's
+						Brew (3 Bottles)</option>
+					<option value="medicinalHerb3" th:text="#{medicinalHerb3}">Medicinal
+						Herb (3)</option>
+					<option value="medicinalHerb4" th:text="#{medicinalHerb4}">Medicinal
+						Herb (4)</option>
+					<option value="medicinalHerb7" th:text="#{medicinalHerb7}">Medicinal
+						Herb (7)</option>
+					<option value="medicinalHerb8" th:text="#{medicinalHerb8}">Medicinal
+						Herb (8)</option>
+					<option value="medicinalHerb11" th:text="#{medicinalHerb11}">Medicinal
+						Herb (11)</option>
+				</select> <br> <select name="item4">
+					<option>-</option>
+					<option value="helmet" th:text="#{helmet}">Helmet</option>
+					<option value="blackDice" th:text="#{blackDice}">Black
+						Dice</option>
+					<option value="witchBrew1x" th:text="#{witchBrew1}">Witch's
+						Brew (½ Bottle)</option>
+					<option value="witchBrew2x" th:text="#{witchBrew2}">Witch's
+						Brew (1 Bottle)</option>
+					<option value="witchBrew3x" th:text="#{witchBrew3}">Witch's
+						Brew (1½ Bottle)</option>
+					<option value="witchBrew4x" th:text="#{witchBrew4}">Witch's
+						Brew (2 Bottles)</option>
+					<option value="witchBrew5x" th:text="#{witchBrew5}">Witch's
+						Brew (2½ Bottles)</option>
+					<option value="witchBrew6x" th:text="#{witchBrew6}">Witch's
+						Brew (3 Bottles)</option>
+					<option value="medicinalHerb3" th:text="#{medicinalHerb3}">Medicinal
+						Herb (3)</option>
+					<option value="medicinalHerb4" th:text="#{medicinalHerb4}">Medicinal
+						Herb (4)</option>
+					<option value="medicinalHerb7" th:text="#{medicinalHerb7}">Medicinal
+						Herb (7)</option>
+					<option value="medicinalHerb8" th:text="#{medicinalHerb8}">Medicinal
+						Herb (8)</option>
+					<option value="medicinalHerb11" th:text="#{medicinalHerb11}">Medicinal
+						Herb (11)</option>
+				</select>
+			</div>
+		</div>
+		<i class="bi bi-person-plus-fill" style="font-size: 24px"
+			th:onclick="addDiv()"></i> <input id="wrapper" type="submit"
+			th:value="#{runBattle}" />
+	</form>
+	<iframe name="battleResultFrame"></iframe>
+</body>
+</html>
