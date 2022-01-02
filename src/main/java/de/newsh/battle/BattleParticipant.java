@@ -340,6 +340,8 @@ public abstract class BattleParticipant implements Cloneable {
 			return new Dwarf();
 		case "Orfen":
 			return new Orfen();
+		case "SeaWarrior":
+			return new SeaWarrior();
 		case "Gor":
 			return new Gor();
 		case "Skral":

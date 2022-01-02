@@ -18,6 +18,7 @@ var warriorl10n = [[#{warrior}]];
 var wizardl10n = [[#{wizard}]];
 var dwarfl10n = [[#{dwarf}]];
 var wolfWarriorl10n = [[#{wolfWarrior}]];
+var seaWarriorl10n = [[#{seaWarrior}]];
 var itemsl10n = [[#{items}]];
 var helmetl10n = [[#{helmet}]];
 var blackDicel10n = [[#{blackDice}]];
@@ -78,6 +79,7 @@ var maxPlayerReachedAlertl10n = [[#{maxPlayerReachedAlert}]];
 					<option value="Wizard" th:text="#{wizard}">Wizard</option>
 					<option value="Dwarf" th:text="#{dwarf}">Dwarf</option>
 					<option value="Orfen" th:text="#{wolfWarrior}">Wizard</option>
+					<option value="SeaWarrior" th:text="#{seaWarrior}">Sea Warrior</option>
 				</select> <label>WP: <select class="willpowerHeroes"
 					name="willpowerHeros"><option
 							th:each="i : ${#numbers.sequence(1, 20)}" th:value="${i}"

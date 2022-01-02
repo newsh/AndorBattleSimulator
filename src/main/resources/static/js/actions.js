@@ -98,6 +98,7 @@ function addDiv() {
 										<option value="Wizard">${wizardl10n}</option>
 										<option value="Dwarf">${dwarfl10n}</option>
 										<option value="Orfen">${wolfWarriorl10n}</option>
+										<option value="SeaWarrior">${seaWarriorl10n}</option>
 									</select> 
 									<label> WP:
 									<select class="willpowerHeroes" name="willpowerHeros">${willpowerOptions} </select>
