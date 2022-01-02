@@ -2,6 +2,8 @@ package de.newsh.heroes;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.commons.math3.util.Precision;
+
 import de.newsh.battle.BattleParticipant;
 import java.util.Arrays;
 
@@ -50,5 +52,17 @@ public class Wizard extends BattleParticipant {
 		int randIndex = ThreadLocalRandom.current().nextInt(0, 5 + 1);
 		int[] regularDiceValues = { 4, 4, 5, 5, 6, 6 };
 		return regularDiceValues[randIndex];
+	}
+	public double getAverageDamagePerRound() {
+		Integer totalDamage = 0;
+		double rolls = 50000;
+		int witchsBrewAmountTmp = this.getWitchsBrew();
+		int medicinalHerbAmountTmp = this.getMedicinalHerb();
+		for (int i = 0; i < rolls; i++) {
+			this.setWitchsBrew(witchsBrewAmountTmp);
+			this.setMedicinalHerb(medicinalHerbAmountTmp);
+			totalDamage += this.getStrength()+ rollDices(false);
+		}
+		return Precision.round(totalDamage / rolls,1);
 	}
 }

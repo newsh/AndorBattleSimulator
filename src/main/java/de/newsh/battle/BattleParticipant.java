@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import org.apache.commons.math3.util.Precision;
+
 import de.newsh.creatures.*;
 import de.newsh.heroes.*;
 
@@ -96,6 +98,19 @@ public abstract class BattleParticipant implements Cloneable {
 		if (isVerbose)
 			System.out.println(name + " rolled " + highestVal + ". " + valuesRolled.toString());
 		return highestVal;
+	}
+
+	public double getAverageDamagePerRound() {
+		Integer totalDamage = 0;
+		double rolls = 50000;
+		int witchsBrewAmountTmp = witchsBrewAmount;
+		int medicinalHerbAmountTmp = medicinalHerbAmount;
+		for (int i = 0; i < rolls; i++) {
+			witchsBrewAmount = witchsBrewAmountTmp;
+			medicinalHerbAmount = medicinalHerbAmountTmp;
+			totalDamage += strength + rollDices(false);
+		}
+		return Precision.round(totalDamage / rolls,1);
 	}
 
 	protected int useMedicinalHerb(int value) {
@@ -252,7 +267,7 @@ public abstract class BattleParticipant implements Cloneable {
 
 	public String toString() {
 		String str = null;
-		str = String.format("%s(%dW,%dS", name, willpower, getStrength());
+		str = String.format("%s(%dW,%dS,%.1fABS", name, willpower, getStrength(), getAverageDamagePerRound());
 		if (hasHelmet)
 			str += ",Helmet";
 		if (hasBlackDice)
