@@ -356,6 +356,12 @@ public abstract class BattleParticipant implements Cloneable {
 			return new BarbarianChieftain();
 		case "BarbarianKing":
 			return new BarbarianKing(12);
+		case "Arrog":
+			return new Arrog();
+		case "Nerax":
+			return new Nerax();
+		case "SeaTroll":
+			return new SeaTroll();
 		default:
 			break;
 		}

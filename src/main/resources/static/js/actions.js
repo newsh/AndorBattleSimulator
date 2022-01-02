@@ -55,6 +55,18 @@ function setCreatureWillpowerAndStrength() {
 			willpowerVal = 1;
 			strengthVal = 12;
 			break;
+		case 'Arrog':
+			willpowerVal = 10;
+			strengthVal = 24;
+			break;
+		case 'Nerax':
+			willpowerVal = 5;
+			strengthVal = 8;
+			break;
+		case 'SeaTroll':
+			willpowerVal = 6;
+			strengthVal = 12;
+			break;
 	}
 
 
