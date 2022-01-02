@@ -110,6 +110,7 @@ function addDiv() {
 										<option value="medicinalHerb7">${medicinalHerb7l10n}</option>
 										<option value="medicinalHerb8">${medicinalHerb8l10n}</option>
 										<option value="medicinalHerb11">${medicinalHerb11l10n}</option>
+										<option value="ballista">${ballistal10n}</option>
 									</select> <br>
 									</label>
 									<select name="item2">
@@ -127,6 +128,7 @@ function addDiv() {
 										<option value="medicinalHerb7">${medicinalHerb7l10n}</option>
 										<option value="medicinalHerb8">${medicinalHerb8l10n}</option>
 										<option value="medicinalHerb11">${medicinalHerb11l10n}</option>
+										<option value="ballista">${ballistal10n}</option>
 									</select> <br>
 									<select name="item3">
 										<option>-</option>
@@ -143,6 +145,7 @@ function addDiv() {
 										<option value="medicinalHerb7">${medicinalHerb7l10n}</option>
 										<option value="medicinalHerb8">${medicinalHerb8l10n}</option>
 										<option value="medicinalHerb11">${medicinalHerb11l10n}</option>
+										<option value="ballista">${ballistal10n}</option>
 									</select> <br>
 									<select name="item4">
 										<option>-</option>
@@ -159,6 +162,7 @@ function addDiv() {
 										<option value="medicinalHerb7">${medicinalHerb7l10n}</option>
 										<option value="medicinalHerb8">${medicinalHerb8l10n}</option>
 										<option value="medicinalHerb11">${medicinalHerb11l10n}</option>
+										<option value="ballista">${ballistal10n}</option>
 									</select>
 									 
 	`)

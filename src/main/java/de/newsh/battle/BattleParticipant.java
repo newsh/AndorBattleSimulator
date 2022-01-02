@@ -32,6 +32,7 @@ public abstract class BattleParticipant implements Cloneable {
 	protected boolean hasBlackDice;
 	private int witchsBrewAmount = 0;
 	private int medicinalHerbAmount = 0;
+	private boolean isOnBallista;
 
 	protected BattleParticipant(int willpower, int strength) {
 		this.willpower = (short) willpower;
@@ -86,7 +87,9 @@ public abstract class BattleParticipant implements Cloneable {
 				valuesRolled.add(rollRegularDice());
 		}
 		int highestVal = 0;
-		if (hasHelmet)
+		if (isOnBallista())
+			highestVal = getBallistaDamage(valuesRolled);
+		else if (hasHelmet)
 			highestVal = getDoubles(valuesRolled);
 		else
 			highestVal = Collections.max(valuesRolled);
@@ -98,6 +101,26 @@ public abstract class BattleParticipant implements Cloneable {
 		if (isVerbose)
 			System.out.println(name + " rolled " + highestVal + ". " + valuesRolled.toString());
 		return highestVal;
+	}
+
+	/**
+	 * Returns value of rolled dices when positioned on Aldebaran's ballista.
+	 * <p>
+	 * Strategy as follows: Only stop rolling when last two dice are both at least
+	 * 3.
+	 * @param valuesRolled
+	 * @return
+	 */
+	private int getBallistaDamage(ArrayList<Integer> valuesRolled) {
+		double cutOffVal = 3.0;
+		if (valuesRolled.size() == 1)
+			valuesRolled.add(0);
+		for (int i = 0; i < valuesRolled.size() - 1; i++) {
+			if (valuesRolled.get(i) >= cutOffVal && valuesRolled.get(i + 1) >= cutOffVal) {
+				return valuesRolled.get(i) + valuesRolled.get(i + 1);
+			}
+		}
+		return valuesRolled.get(valuesRolled.size() - 2) + valuesRolled.get(valuesRolled.size() - 1);
 	}
 
 	public double getAverageDamagePerRound() {
@@ -276,6 +299,8 @@ public abstract class BattleParticipant implements Cloneable {
 			str += ", Witch's Brew (" + getWitchsBrew() + ")";
 		if (hasMedicinalHerb())
 			str += ", Medicinal Herb (" + getMedicinalHerb() + ")";
+		if (isOnBallista())
+			str += ",Ballista";
 		str += ")";
 		return str;
 	}
@@ -335,5 +360,13 @@ public abstract class BattleParticipant implements Cloneable {
 			break;
 		}
 		return null;
+	}
+
+	public boolean isOnBallista() {
+		return isOnBallista;
+	}
+
+	public void setOnBallista(boolean isOnBallista) {
+		this.isOnBallista = isOnBallista;
 	}
 }

@@ -65,6 +65,8 @@ public class BattleSimController {
 				hero.setMedicinalHerb(8);
 			if (isSelectedAsItem("medicinalHerb11", itemsList))
 				hero.setMedicinalHerb(11);
+			if (isSelectedAsItem("ballista", itemsList))
+				hero.setOnBallista(true);
 			heroGroup.add(hero);
 		}
 		BattleParticipant enemy = BattleParticipant.getClassByName(creature);
