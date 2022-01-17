@@ -153,6 +153,14 @@ public class Battle {
 		return heroes.stream().collect(Collectors.summingInt(hero -> hero.getStrength()));
 	}
 
+	/**
+	 * Retrieves accumulated value of every hero's individual average battle
+	 * strength.
+	 */
+	public double getHeroesGroupsAverageBattleStrength() {
+		return heroes.stream().collect(Collectors.summingDouble(hero -> hero.getAverageDamagePerRound()));
+	}
+
 	private boolean participantsStillHaveWillpowerPts() {
 		return creatureTmp.getWillpower() > 0 && heroesTmp.stream().allMatch(hero -> hero.getWillpower() > 0);
 	}
