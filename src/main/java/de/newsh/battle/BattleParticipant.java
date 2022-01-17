@@ -135,7 +135,7 @@ public abstract class BattleParticipant implements Cloneable {
 
 	public double getAverageDamagePerRound() {
 		Integer totalDamage = 0;
-		double rolls = 50000;
+		double rolls = 100000;
 		int witchsBrewAmountTmp = witchsBrewAmount;
 		int medicinalHerbAmountTmp = medicinalHerbAmount;
 		for (int i = 0; i < rolls; i++) {

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Battle {
-	private int numberOfSimulationsToRun = 50000;
+	private int numberOfSimulationsToRun = 100000;
 	private List<BattleParticipant> heroes = new ArrayList<BattleParticipant>();
 	private List<BattleParticipant> heroesTmp = new ArrayList<BattleParticipant>();
 	private BattleParticipant creature;
