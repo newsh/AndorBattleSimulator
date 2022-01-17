@@ -80,6 +80,7 @@ public class Battle {
 			if (creatureTmp.getWillpower() <= 0)
 				heroesWinCount++;
 		}
+		resetBattleData();
 		printSummary();
 	}
 

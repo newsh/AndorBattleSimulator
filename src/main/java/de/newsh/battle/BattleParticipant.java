@@ -139,9 +139,9 @@ public abstract class BattleParticipant implements Cloneable {
 		int witchsBrewAmountTmp = witchsBrewAmount;
 		int medicinalHerbAmountTmp = medicinalHerbAmount;
 		for (int i = 0; i < rolls; i++) {
+			totalDamage += strength + rollDices(false);
 			witchsBrewAmount = witchsBrewAmountTmp;
 			medicinalHerbAmount = medicinalHerbAmountTmp;
-			totalDamage += strength + rollDices(false);
 		}
 		return Precision.round(totalDamage / rolls,1);
 	}
