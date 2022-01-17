@@ -180,15 +180,15 @@ public class Battle {
 		return creature.toString();
 	}
 	public String getWinRatePercentage() {
-		DecimalFormat df = new DecimalFormat("####0.00");
+		DecimalFormat df = new DecimalFormat("####0.0");
 		return df.format((double) heroesWinCount / numberOfSimulationsToRun * 100) + " %";
 	}
 	public String getWillpowerLostAverage() {
-		DecimalFormat df = new DecimalFormat("####0.00");
+		DecimalFormat df = new DecimalFormat("####0.0");
 		return df.format((double) willpowerLostTotal / numberOfSimulationsToRun);
 	}
 	public String getHoursNeededAverage() {
-		DecimalFormat df = new DecimalFormat("####0.00");
+		DecimalFormat df = new DecimalFormat("####0.0");
 		return df.format((double) hoursNeededTotal / numberOfSimulationsToRun);
 	}
 }
