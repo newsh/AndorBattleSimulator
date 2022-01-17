@@ -47,6 +47,16 @@ public abstract class BattleParticipant implements Cloneable {
 		return name;
 	}
 
+	/**
+	 * Convenience method for retrieving correct keys found in .properties
+	 * localization files.
+	 *
+	 * @return
+	 */
+	public String getNameInCamelcase() {
+		String nameInCamelCase = name.replace(" ", "");
+		return nameInCamelCase.substring(0, 1).toLowerCase() + nameInCamelCase.substring(1);
+	}
 	public short getWillpower() {
 		return willpower;
 	}
