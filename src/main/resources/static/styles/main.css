@@ -43,4 +43,10 @@ input[type=submit]:hover {
 
 iframe {
 	border: 0px;
+	height: 100vh
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size:20px
 }

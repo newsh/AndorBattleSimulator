@@ -75,6 +75,8 @@ public class BattleSimController {
 
 		Battle battle = new Battle(heroGroup, enemy);
 		battle.runSimulations();
+		model.addAttribute("heroGroup", heroGroup);
+		model.addAttribute("enemy", enemy);
 		model.addAttribute("battle", battle);
 		return "battleSimResult";
 

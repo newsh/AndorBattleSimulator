@@ -2,7 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title th:text="#{andorBattleSimulatorResult}">Andor Battle Simulator - Result</title>
+<title th:text="#{andorBattleSimulatorResult}">Andor Battle
+	Simulator - Result</title>
+<link th:href="@{/styles/main.css}" rel="stylesheet" />
 <style>
 p {
 	font-size: 20px
@@ -15,7 +17,22 @@ p {
 	</p>
 	<p th:inline="text">[[#{willpowerLoss}]]: ∅
 		[[${battle.getWillpowerLostAverage}]]</p>
-	<p th:inline="text">[[#{hoursSpent}]]: ∅
-		[[${battle.getHoursNeededAverage}]]</p>
+	<p th:text="#{hoursSpent} + ': ∅ ' + ${battle.getHoursNeededAverage}">[[#{hoursSpent}]]:
+		∅ [[${battle.getHoursNeededAverage}]]</p>
+	<p th:text="#{averageBattleStrength}+':'">Average Battle Strength:</p>
+	<table>
+		<tr>
+			<td th:text="#{creature} +' ('+ #{${enemy.getNameInCamelcase()}} + ')'">Gor</td>
+			<td th:text="${enemy.getAverageDamagePerRound()}">5.0</td>
+		</tr>
+		<tr>
+			<td th:text="#{herosTotal}">Heros(total) </td>
+			<td th:text="${battle.getHeroesGroupsAverageBattleStrength}">20.0</td>
+		</tr>
+		<tr th:each="hero : ${heroGroup}">
+			<td th:text="#{${hero.getNameInCamelcase()}}">Archer</td>
+			<td th:text="${hero.getAverageDamagePerRound()}">5.0</td>
+		</tr>
+	</table>
 </body>
 </html>
